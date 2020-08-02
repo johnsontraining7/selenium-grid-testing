@@ -25,6 +25,8 @@ public class GridExample {
 	@Parameters({"nodeUrl","browser"})
 	public void setup(String nodeUrl, String browser) throws Exception {
 		
+		System.out.println("Using nodeurl : " + nodeUrl);
+		System.out.println("Using browser : " + browser);
 		DesiredCapabilities caps = null;
 		if(browser.equalsIgnoreCase("chrome")) {
 			caps = DesiredCapabilities.chrome();
@@ -33,9 +35,10 @@ public class GridExample {
 		} else {
 			throw new Exception("Invalid browser name specified in testng.xml.");
 		}
-		
 		caps.setPlatform(Platform.ANY);
 		driver = new RemoteWebDriver(new URL(nodeUrl), caps);
+		
+
 		ngDriver = new NgWebDriver(driver);
 		ngDriver.manage().window().maximize();
 		ngDriver.get(baseUrl);
